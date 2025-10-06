@@ -40,21 +40,28 @@
 #...............................................................................................................................................................................
 
 
-#    -    centroid_df               -    a dataframe of latitude and longitude coordinates for which to extract the climate data from the rasters.
+#    -    centroid_df               -    the output of the make_cell_centroids_df using method = "grid"
+
+#                                         - Users can use a dataframe produced separately but it must adhere to the below:
+
 #                                         -  NOTE THAT THE coordinates of the centroids MUST be rounded to match the resolution of the rasters being used:
 #                                                     - IF using BOM/SILO/Rescaled ANUClim  -  0.05 x 0.05
 #                                                     - IF using original resolution ANUClim ONLY  -  0.01 x 0.01
+
 #                                         -  Coordinates to be in CRS 4326 and as decimal degrees
+
 #                                         -  Collumns for coordinates should be named as "lat" and "lon"
+
 #                                         -  Each location should be accompanied with a unique identifier number, with collumn name "centroid_id"
-                                                      # Example dataframe:
-                                                      #......................
-                                                      #        lat      lon    centroid_id
-                                                      # 1   -35.00   150.40              1
-                                                      # 2   -35.00   150.45              2
-                                                      # 3   -35.00   150.50              3
-                                                      # 4   -35.00   150.55              4
-                                                      # 5   -35.00   150.60              5
+
+                                                # Example dataframe:
+                                                #......................
+                                                #        lat      lon    centroid_id
+                                                # 1   -35.00   150.40              1
+                                                # 2   -35.00   150.45              2
+                                                # 3   -35.00   150.50              3
+                                                # 4   -35.00   150.55              4
+                                                # 5   -35.00   150.60              5
 
 
 #...............................................................................................................................................................................

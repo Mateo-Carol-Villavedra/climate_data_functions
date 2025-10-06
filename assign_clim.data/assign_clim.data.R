@@ -45,14 +45,17 @@
 #...............................................................................................................................................................................
 
 
-#    -    sample_df                 -  a dataframe of samples for which the climate data is to be collected. 
+#    -    sample_df                 -  -    the output of the make_cell_centroids_df using method = "sample"
+
 #                                         -  Each row should be a unique sample and sample ID  
+
 #                                         -  Must contain the following collumns, named as described:
 #                                                -  sample.id    - Sample ID for each sample
 #                                                -  lat          - latitude for each sample (rounded to match the target resolution)
 #                                                -  lon          - longitude for each sample (rounded to match the target resolution)
 #                                                -  date         - date of collection of sample (a character string as "dd/mm/yyyy" - i.e. the 24th of December, 1965 as "24/12/1965")
-#                                                -  Example sample_df:
+
+#                                         -  Example sample_df:
                                                       # 'data.frame':	428 obs. of  14 variables:
                                                       #  $ sample.id     : chr  "ANIC-14" "ANIC-16" "ANIC-17" "ANIC-18" ...
                                                       #  $ sample_no     : int  14 16 17 18 20 21 22 23 24 25 ...
@@ -74,6 +77,7 @@
 
 
 #    -    pre_period                -  the length of time prior to the sample collection date for which to collate climate data
+
 #                                         -  formatted as a List of Integers where:
 #                                               - First Element  = Number of years
 #                                               - Second Element = number of Months
@@ -94,6 +98,7 @@
 
 
 #    -    post_period               -  the length of time following the sample collection date for which to collate climate data
+
 #                                         -  formatted as a List of Integers where:
 #                                               - First Element  = Number of years
 #                                               - Second Element = number of Months
