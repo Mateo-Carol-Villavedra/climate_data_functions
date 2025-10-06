@@ -193,8 +193,9 @@ Compute Bioclimatix Indices for grid cells to produce spatial grids of indices.
 
 An example dataset to test the functions and their use can be found in this repository under in the folder "test_dataset"
 
-It contains a metadata file which is correctly formatted for the functions as well as 
+It contains a metadata file which is correctly formatted for the functions as well as an example shapefile to use to crop the climate data rasters. 
 
+Due to the size of the climate data files, examples were not uploaded. 
 
 
 ----
