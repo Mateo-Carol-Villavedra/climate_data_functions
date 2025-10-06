@@ -1429,6 +1429,157 @@ rescale_align_rasters(var_directories = c("github/clim_data/t_min", "github/clim
 
 
 
+
+# make_cell_centroids_df 
+
+This function uses a template cropped raster to produce a dataframe of centroids for each cell in the cropped region (method = grid) or for each cell within the region for which a sample was collected (method = sample)
+
+Outputs an RDS file. 
+
+```{r function for creating a polygon of centroids}
+
+
+# Function INPUT DATA     ----
+
+#    -    template                  -  A single example raster from which the centroids will be computed to the right resolution
+
+
+#...............................................................................................................................................................................
+
+
+#    -    sample_df                 -  a dataframe of samples for which the climate data is to be collected. 
+#                                         -  Each row should be a unique sample and sample ID  
+#                                         -  Must contain the following collumns, named as described:
+#                                                -  sample.id    - Sample ID for each sample
+#                                                -  lat          - latitude for each sample (rounded to match the target resolution)
+#                                                -  lon          - longitude for each sample (rounded to match the target resolution)
+#                                         -  Example sample_df:
+                                                      # 'data.frame':	428 obs. of  14 variables:
+                                                      #  $ sample.id     : chr  "ANIC-14" "ANIC-16" "ANIC-17" "ANIC-18" ...
+                                                      #  $ sample_no     : int  14 16 17 18 20 21 22 23 24 25 ...
+                                                      #  $ lat           : num  -35.6 -35.6 -35.1 -35.7 -35.7 ...
+                                                      #  $ lon           : num  150 150 150 150 150 ...
+
+
+#...............................................................................................................................................................................
+
+
+#    -    method                    -  A character string to determine the method for the function:
+#                                         -  "grid"  =  Extracts every centroid for the entire cropped sampling region
+#                                         -  "sample"  =  Extracts centroids for the grid cells for which samples are found. 
+
+
+#...............................................................................................................................................................................
+
+
+#    -    directory                 -  the directory in which to save the file - file named automatically by the function based on resolution and method. 
+#                                         - File saved as a .csv file 
+
+
+#----
+
+
+make_cell_centroids_df <- function(template = NULL,
+                                   sample_df = NULL,
+                                   method = "grid",
+                                   directory) {
+      
+      # Loading Required Packages:
+      library(terra)
+      library(sf)
+      library(tidyverse)
+      
+      # Function if the user is converting a grid to centroids based on the shapefile;
+      if(method == "grid") {
+            
+      
+            if(is.null(template)) {
+                  stop("Template Raster Required for Method = Grid ")
+            }
+      
+      # Load in the template raster - Band 1:
+      template_rast <- terra::rast(template)
+      
+      # getting the resolution of the template:
+      resolution <- res(template_rast)[1]
+      
+      
+      # Converting each cell to a centroid point
+      pts <- as.data.frame(template_rast[[1]], xy = TRUE, na.rm = TRUE)
+      
+      # Assigning a centroid ID
+      centroids_df <- data.frame(centroid.id = 1:nrow(pts), lat = pts$y, lon = pts$x)
+            
+      # Saving the Object and Returning it to the user:
+      write.csv(centroids_df, paste0(directory, "/region.grid_centroids_res=", resolution, ".csv"))
+      return(centroids_df)  
+            
+      
+      } else if(method == "sample") {
+            
+            if(is.null(template)) {
+                  stop("Template Raster Required for Method = Sample ")
+            }
+            
+            
+            if(is.null(sample_df)) {
+                  stop("Sample Locations Required for Method = Sample")
+            }
+            
+            
+      # Load in the template raster - Band 1:
+      template_rast <- terra::rast(template)
+      
+      # getting the resolution of the template:
+      resolution <- res(template_rast)[1]
+      
+      
+      centroids_df <- sample_df %>%
+                                  rename(raw_lat = lat, 
+                                         raw_lon = lon)
+                                  mutate(lon = round(raw_lat / resolution) * resolution,
+                                         lat = round(raw_lat / resolution) * resolution) %>%
+                                  distinct(lat, lon) %>%
+                                  mutate(centroid.id = row_number())
+      
+      # Saving the Object and Returning it to the user:
+      write.csv(centroids_df, paste0(directory, "/sample_centroids_res=", resolution, ".csv"))
+      return(centroids_df)  
+
+      } else {
+            stop("Method must be 'grid' or 'sample'")
+      }
+}
+
+
+```
+
+```{r testing the function}
+
+
+ind_meta <- read.csv("test_dataset/Example_metadata.csv")
+str(ind_meta)
+
+
+
+test.centroids_grid <- make_cell_centroids_df(template = "D:/Mateo/OneDrive - Macquarie University/2 - Tisiphone Abeona Project/Analysis/github/clim_data/daily_rain/processed/daily_rain_2019_processed.nc",
+                       sample_df = ind_meta,
+                       method = "grid",
+                       directory = "test_dataset")
+
+nrow(test.centroids_grid)
+
+```
+
+#. 
+
+
+
+
+
+
+
+
 # extract_and_compile_clim.data
 
 
@@ -1455,7 +1606,7 @@ this error results in many NA values - ensure that the shapefile used earlier en
 #...............................................................................................................................................................................
 
 
-#    -    centroid_df               -    a dataframe of latitude and longitude coordinates for which to extract the climate data from the rasters.
+#    -    centroid_df               -    the output of the make_cell_centroids_df using method = "grid"
 #                                         -  NOTE THAT THE coordinates of the centroids MUST be rounded to match the resolution of the rasters being used:
 #                                                     - IF using BOM/SILO/Rescaled ANUClim  -  0.05 x 0.05
 #                                                     - IF using original resolution ANUClim ONLY  -  0.01 x 0.01
@@ -1815,15 +1966,18 @@ extract_and_compile_clim.data <- function(var_directories,  centroid_df, output_
 ```{r testing the function}
 
 
-clim_dir <- c("github/clim_data/daily_rain", "github/clim_data/radiation", 
-              "github/clim_data/tmin", "github/clim_data/tmax",
-              "github/clim_data/t_min", "github/clim_data/t_max")
+clim_dir <- c("D:/Mateo/OneDrive - Macquarie University/2 - Tisiphone Abeona Project/Analysis/github/clim_data/daily_rain",
+              "D:/Mateo/OneDrive - Macquarie University/2 - Tisiphone Abeona Project/Analysis/github/clim_data/radiation", 
+              "D:/Mateo/OneDrive - Macquarie University/2 - Tisiphone Abeona Project/Analysis/github/clim_data/tmin",
+              "D:/Mateo/OneDrive - Macquarie University/2 - Tisiphone Abeona Project/Analysis/github/clim_data/tmax",
+              "D:/Mateo/OneDrive - Macquarie University/2 - Tisiphone Abeona Project/Analysis/github/clim_data/t_min",
+              "D:/Mateo/OneDrive - Macquarie University/2 - Tisiphone Abeona Project/Analysis/github/clim_data/t_max")
 
 
-centroids <- read.csv("github/centroid_lat_lons.csv")
+centroids <- read.csv("test_dataset/region.grid_centroids_res=0.05.csv")
 str(centroids)
 
-test_conversion <- extract_and_compile_clim.data(clim_dir, centroids, "github/compiled_raster_clim_df.RDS")
+test_conversion <- extract_and_compile_clim.data(clim_dir, centroids, "test_dataset/compiled_raster_clim_df.RDS")
 str(test_conversion)
 
 ```
@@ -2117,7 +2271,7 @@ NOTE: This function is designed to compute BIOclimatic indices for each sample o
 
 Computes BIOCLIM 1-27 using daily values for maximum temperature, minimum temperature, precipitation and radiation, allowing the user to decide which BIOCLIM indices they would like to compute. 
 
-In order to compute all indices, the function requires all 4 of the above described climate variables, however, the function will only fail if the user does not provide the specific climate variables required for the indices they have selected are missing. 
+In order to compute all indices, the function requires all 4 of the above described climate variables, however, the function will only fail if the user does not provide the specific climate variables required for the indices they have selected. 
 
 
 

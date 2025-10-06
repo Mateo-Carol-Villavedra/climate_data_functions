@@ -47,14 +47,14 @@
 #                                         -  Coordinates to be in CRS 4326 and as decimal degrees
 #                                         -  Collumns for coordinates should be named as "lat" and "lon"
 #                                         -  Each location should be accompanied with a unique identifier number, with collumn name "centroid_id"
-# Example dataframe:
-#......................
-#        lat      lon    centroid_id
-# 1   -35.00   150.40              1
-# 2   -35.00   150.45              2
-# 3   -35.00   150.50              3
-# 4   -35.00   150.55              4
-# 5   -35.00   150.60              5
+                                                      # Example dataframe:
+                                                      #......................
+                                                      #        lat      lon    centroid_id
+                                                      # 1   -35.00   150.40              1
+                                                      # 2   -35.00   150.45              2
+                                                      # 3   -35.00   150.50              3
+                                                      # 4   -35.00   150.55              4
+                                                      # 5   -35.00   150.60              5
 
 
 #...............................................................................................................................................................................
