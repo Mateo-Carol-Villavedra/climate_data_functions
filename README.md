@@ -19,51 +19,39 @@ R Functions developed as part of Carol Villavedra et al. (2022) for extracting a
  
 # Functions:
 
-#### 1 - `download_AGCD_data`
-Downloads annual files of daily climate data rasters for each user specified year from the AGCD Database (Previously BOM AWAP), reprojects them to CRS:4326 and crops them to an extent defined by a user supplied shapefile.
+|  Function  |  Description :  |  Dependencies:  |
+| :--------: |  :------------  | :------------   |
+|            |                 |                 |
+| `download_AWAP_data` |  Downloads annual files of daily climate data rasters for each user specified year from the AGCD Database (Previously BOM AWAP), reprojects them to CRS:4326 and crops them to an extent defined by a user supplied shapefile.  |  `curl`, `terra` | 
+|            |                 |                 |
+| `download_SILO_data` |  Downloads annual files of daily climate data rasters for each user specified year from the SILO Database, reprojects them to CRS:4326 and crops them to an extent defined by a user supplied shapefile.   |  `curl`, `terra` | 
+|            |                 |                 |
+| `download_ANUCLIM_data` |  Downloads monthly files of daily climate data rasters for each user specified year from the ANUClimate Database, reprojects them to CRS:4326, crops them to an extent defined by a user supplied shapefile and then stacks the monthly rasters into a single annualised raster.   |  `curl`, `terra`, `tidverse`| 
+|            |                 |                 |
+| `rescale_rasters` |  Rescales ANUClimate 2.0 Gridded data (0.01°x0.01°) to match the resolution of AGCD and SILO gridded data (0.05°x0.05), if they are to be used simultaneously.   |  `terra`, `tidyverse` | 
+|            |                 |                 |
+| `make_cell_centroids_df` |  Computes grid cell centroid locations for grid cells or samples to the resolution of the rasters being used.   | `terra`, `sf`, `tidyverse` | 
+|            |                 |                 |
+| `extract_and_compile_clim.data` |  Extracts climate data for every day in the rasters in question for each location from a set of user supplied centroids, converting all data to a long format dataframe.   |  `sf`, `terra`, `tidyverse`, `data.table` | 
+|            |                 |                 |
+| `assign_clim.data` |  Assigns climate data from the output of the "extract_and_compile_clim.data" function to each individual based on location and sampling date, with user defined temporal envelopes for each sample.  | `tidyverse`, `data.table` | 
+|            |                 |                 |
+| `compute_ind_bioclims` |  Computes bioclimatic indices BIO1-BIO27 (See Xu and Hutchinson 2011) for each individual for an annualised set of dates, extracted by the function "assign_clim.data".  | `tidyverse`| 
+|            |                 |                 |
+| `compute_centroid_bioclims` |  Computes bioclimatic indices for each calendar year at each centroid from the dataframe produced by the "extract_and_compile_clim.data" function, optinoally allowing for the averaging of these values of any time period.   |`tidyverse` | 
 
- <br/>
-  
-#### 2 - `download_SILO_data`
-Downloads annual files of daily climate data rasters for each user specified year from the SILO Database, reprojects them to CRS:4326 and crops them to an extent defined by a user supplied shapefile. 
+<br/>
+<br/>
 
- <br/>
-  
-#### 3 - `download_ANUClim_data`
-Downloads monthly files of daily climate data rasters for each user specified year from the ANUClimate Database, reprojects them to CRS:4326, crops them to an extent defined by a user supplied shapefile and then stacks the monthly rasters into a single annualised raster. 
+## Dependencies:
 
- <br/>
-  
-#### 4 - `rescale_rasters`
-Rescales ANUClimate 2.0 Gridded data (0.01°x0.01°) to match the resolution of AGCD and SILO gridded data (0.05°x0.05), if they are to be used simultaneously. 
+### All Dependencies
 
- <br/>
-  
-#### 5 - `make_cell_centroids_df`
-Computes grid cell centroid locations for grid cells or samples to the resolution of the rasters being used. 
-
- <br/>
-  
-#### 6 - `extract_and_compile_clim.data` 
-Extracts climate data for every day in the rasters in question for each location from a set of user supplied centroids, converting all data to a long format dataframe. 
-
- <br/>
-  
-#### 7 - `assign_clim.data`
-Assigns climate data from the output of the "extract_and_compile_clim.data" function to each individual based on location and sampling date, with user defined temporal envelopes for each sample. 
-
- <br/>
-  
-#### 8 - `compute_ind_bioclims`
-Computes bioclimatic indices BIO1-BIO27 (See Xu and Hutchinson 2011) for each individual for an annualised set of dates, extracted by the function "assign_clim.data".
-
- <br/>
-  
-#### 9 - `compute_centroid_bioclims`
-Computes bioclimatic indices for each calendar year at each centroid from the dataframe produced by the "extract_and_compile_clim.data" function, optinoally allowing for the averaging of these values of any time period. 
-
- <br/>
- <br/>
+`curl` <br/>
+`terra` <br/>
+`sf` <br/>
+`tidyverse` <br/>
+`data.table` <br/>
   
 ----
 
@@ -131,69 +119,6 @@ Computes bioclimatic indices for each calendar year at each centroid from the da
 | Vapour Pressure Deficit | vpd                 |     1960       |
 
 
-<br/>
-<br/>
-
-----
-
- <br/>
-
-## Dependencies:
-
-### All Dependencies
-
-`curl` <br/>
-`terra` <br/>
-`sf` <br/>
-`tidyverse` <br/>
-`data.table` <br/>
-
- <br/>
-
-### Function Specific Dependencies
-
-### `download_AWAP_data`: 
-`curl`, `terra`
-<br/>
-<br/>
-
-### `download_SILO_data`: 
-`curl`, `terra`
-<br/>
-<br/>
-
-### `download_ANUCLIM_data`: 
-`curl`, `terra`, `tidverse`
-<br/>
-<br/>
-
-### `rescale_rasters`: 
-`terra`, `tidyverse`
-<br/>
-<br/>
-
-### `make_cell_centroids_df`:
-`terra`, `sf`, `tidyverse`
- <br/>
- <br/>
-
-### `extract_and_compile_clim.data`:
-`sf`, `terra`, `tidyverse`, `data.table`
-<br/>
-<br/>
-
-### `assign_clim.data`: 
-`tidyverse`, `data.table`
-<br/>
-<br/>
-
-### `compute_ind_bioclims`:
-`tidyverse`
-<br/>
-<br/>
-
-### `compute_centroid_bioclims`:
-`tidyverse`
 <br/>
 <br/>
 
