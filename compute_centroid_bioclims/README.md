@@ -6,13 +6,13 @@
 
 A function to compute bioclimatic indices (BIO1-BIO27) for each grid cell centroid based on their assigned climate data from the `extract_and_compile_clim.data` function. <br/>
 
-This function calculates bioclimatic indices for **each calendar year** at each grid cell location, using daily climate values for maximum temperature, minimum temperature, precipitation, and/or radiation. <br/>
+This function calculates bioclimatic indices for each calendar year at each grid cell location, using daily climate values for maximum temperature, minimum temperature, precipitation, and/or radiation. <br/>
 
-Unlike `compute_ind_bioclims` which computes indices for individual samples with 1-year periods, this function computes indices for grid cells across multiple calendar years, making it suitable for creating spatial grids of bioclimatic indices. <br/>
+Unlike `compute_ind_bioclims` which computes indices for individual samples with user specified periods, this function computes indices for grid cells across multiple calendar years, making it suitable for creating spatial grids of bioclimatic indices. <br/>
 
-**Key Feature:** The function includes an optional temporal averaging capability, allowing users to compute multi-year average indices (e.g., decadal averages) for each grid cell. <br/>
+The function includes an optional temporal averaging capability, allowing users to compute multi-year average indices (e.g., decadal averages) for each grid cell. <br/>
 
-Users can select which indices to compute and which climate variables to use, combining variables from any combination of the three databases (SILO, AGCD, ANUClimate). The function intelligently handles synonymous variable names (e.g., `tmax`, `max_temp`, `t_max` all represent maximum temperature). <br/>
+Users can select which indices to compute and which climate variables to use, combining variables from any combination of the three databases (SILO, AGCD, ANUClimate). The function handles synonymous variable names (e.g., `tmax`, `max_temp`, `t_max` all represent maximum temperature). <br/>
 
 The function will only fail if specific climate variables required for the requested indices are missing. Not all 4 climate variable types are needed unless computing all 27 indices. <br/>
 
@@ -89,12 +89,12 @@ A character vector specifying which climate variables to use for computing biocl
 
 The function handles synonymous variable names from different data sources:
 
-|Climate Variable     | AGCD Name | SILO Name   | ANUClimate Name |
-|:--------------------|:----------|:------------|:----------------|
-|Maximum Temperature  | tmax      | max_temp    | t_max           |
-|Minimum Temperature  | tmin      | min_temp    | t_min           |
-|Precipitation        | precip    | daily_rain  | rain            |
-|Radiation            | —         | radiation   | srad            |
+|Climate Variable     | AGCD Name   | SILO Name     | ANUClimate Name |
+|:--------------------|:------------|:--------------|:----------------|
+|Maximum Temperature  | `tmax`      | `max_temp`    | `t_max `        |
+|Minimum Temperature  | `tmin`      | `min_temp`    | `t_min`         |
+|Precipitation        | `precip`    | `daily_rain`  | `rain`          |
+|Radiation            |             | `radiation`   | `srad`          |
 
 **Important:** Only specify **one** variable name per climate type. For example, use either `"tmax"` OR `"max_temp"` OR `"t_max"`, but not multiple. The function will return an error if multiple synonymous variables are specified. <br/>
 
@@ -183,9 +183,7 @@ The dataframe is saved as an RDS file at the specified output path and returned 
 
 ## Notes:
 
-- **Purpose:** This function is designed for creating spatial grids of bioclimatic indices, computing values for each grid cell across multiple calendar years
-- Indices are calculated for complete calendar years (January 1 - December 31) for each centroid
-- The temporal averaging feature (`av_period_by`) is useful for creating climate normal periods or reducing inter-annual variability
+- The temporal averaging feature (`av_period_by`) is useful for creating climate normal periods or reducing inter-annual variability  <br/>
 - The function automatically handles synonymous variable names from different data sources (SILO, AGCD, ANUClimate)
 - If multiple synonymous variables exist in the input data (e.g., both `tmax` and `max_temp`), specify only one in `var.names` - the function will remove the others and standardize naming
 - Not all four variable types (max temp, min temp, precip, radiation) are required unless computing all 27 indices
@@ -195,8 +193,7 @@ The dataframe is saved as an RDS file at the specified output path and returned 
 - Leap years (366 days) are handled automatically
 - Processing time depends on the number of centroids, years, indices requested, and variables included
 - For large datasets, consider processing subsets of years or indices separately
-- The output can be converted to raster format using the `terra` package for spatial visualization and analysis
-
+- The output can be converted back to raster format using the `terra` package for spatial visualization and analysis
 
 <br/>
 
