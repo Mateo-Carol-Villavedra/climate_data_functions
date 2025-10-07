@@ -17,7 +17,7 @@ R Functions developed as part of Carol Villavedra et al. (2022) for extracting a
 
  <br/>
  
-## Functions:
+# Functions:
 
 #### 1 - `download_AGCD_data`
 Downloads annual files of daily climate data rasters for each user specified year from the AGCD Database (Previously BOM AWAP), reprojects them to CRS:4326 and crops them to an extent defined by a user supplied shapefile.
@@ -66,6 +66,8 @@ Computes bioclimatic indices for each calendar year at each centroid from the da
  <br/>
   
 ----
+
+ <br/>
 
 ## Available Climate Data:
 <br/>
@@ -133,9 +135,10 @@ Computes bioclimatic indices for each calendar year at each centroid from the da
 <br/>
 
 ----
-## Dependencies:
 
  <br/>
+
+## Dependencies:
 
 ### All Dependencies
 
@@ -150,32 +153,32 @@ Computes bioclimatic indices for each calendar year at each centroid from the da
 ### Function Specific Dependencies
 
 ### `download_AWAP_data`: 
-`curl`, `terra` 
+`curl`, `terra`
 <br/>
 <br/>
-  
+
 ### `download_SILO_data`: 
-`curl`, `terra`  
+`curl`, `terra`
 <br/>
 <br/>
-  
+
 ### `download_ANUCLIM_data`: 
 `curl`, `terra`, `tidverse`
 <br/>
 <br/>
-  
+
 ### `rescale_rasters`: 
 `terra`, `tidyverse`
 <br/>
 <br/>
-  
+
 ### `make_cell_centroids_df`:
-`terra`, `sf`, `tidyverse`  
+`terra`, `sf`, `tidyverse`
  <br/>
  <br/>
-  
+
 ### `extract_and_compile_clim.data`:
-`sf`, `terra`, `tidyverse`, `data.table`  
+`sf`, `terra`, `tidyverse`, `data.table`
 <br/>
 <br/>
 
@@ -183,19 +186,20 @@ Computes bioclimatic indices for each calendar year at each centroid from the da
 `tidyverse`, `data.table`
 <br/>
 <br/>
-  
+
 ### `compute_ind_bioclims`:
-`tidyverse`  
+`tidyverse`
 <br/>
 <br/>
-  
+
 ### `compute_centroid_bioclims`:
-`tidyverse`  
+`tidyverse`
 <br/>
 <br/>
-  
+
 ----
  <br/>
+ 
 ## User Supplied Data:
 
 In order to use these functions, the user will need to provide the following:
@@ -240,7 +244,7 @@ Used in `make_cell_centroids_df` and `assign_clim.data`
 ----
  <br/>
 
-## Workflow:
+# Workflow:
 
 
 ### Step 1:
@@ -268,7 +272,7 @@ Generate dataframes of cell centroids according to raster resolution for all gri
 
 ### Step 4:
 
-Convert Multi-band Rasters to Long format dataframes, using the processed rasters and the dataframe produced by the **make_centroids_df** function (method = "grid").
+Convert Multi-band Rasters to Long format dataframes, using the processed rasters and the dataframe produced by the `make_centroids_df` function (method = "grid").
 
 **Functions:** `extract_and_compile_clim.data`
  <br/>
@@ -276,9 +280,9 @@ Convert Multi-band Rasters to Long format dataframes, using the processed raster
 
 ### Step 5: 
 
-Assign climate data to individuals based on the location and date in the output of **make_cell_centroids_df** function and user defined prior and post periods. 
+Assign climate data from the output of `extract_and_compile_clim.data` to individuals based on the location and date in the output of `make_cell_centroids_df` function (method = "sample") and user defined prior and post periods. 
 
-**NOTE:** If downstream workflow includes computing bioclimatic indices for each individual, ensure the time period for which climate data is assigned to each individual is equal to 1 year (365/366 days)
+**NOTE:** If downstream workflow includes computing bioclimatic indices for each individual (`compute_ind_bioclims`), ensure the time period for which climate data is assigned to each individual is equal to 1 year (365/366 days)
 
 **Functions:** `assign_clim.data`
  <br/>
@@ -312,6 +316,7 @@ It contains a metadata file which is correctly formatted for the functions as we
 Due to the size of the climate data files, examples were not uploaded. 
 
 <br/>
+
 ----
 
 ## Monthly Climate Data Processing:
@@ -327,10 +332,11 @@ Furthermore, if the sample date resolution is daily, it may be necessary to prod
 This should not be a problem for the annualised gridded bioclimatic indices. 
 
 <br/>
+
 -----
 
 
-## Contacts:
+# Contacts:
 
 These functions may have errors or issues or simply we may not have thought of a useful functionality - Please contact us. 
 
