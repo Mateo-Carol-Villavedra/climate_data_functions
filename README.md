@@ -10,7 +10,7 @@ R Functions developed as part of Carol Villavedra et al. (2022) for extracting a
 
 ## If you use these functions, please cite our paper:
 
-#### Carol Villavedra, M., Allen, D., Dudaniec, R.Y., O'Hare, J. and Beaumont, L.J. (2026). "Historical shifts in wing morphology linked to climate change in the butterfly Tisphone abeona (Nymphalidae; Satyrinae)." 
+#### Carol Villavedra, M., Allen, A.P., Dudaniec, R.Y., O'Hare, J.A. and Beaumont, L.J. (2026). "Historical shifts in wing morphology linked to climate change in the butterfly Tisphone abeona (Nymphalidae; Satyrinae)." 
 <br/>
 
 ----
