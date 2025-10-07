@@ -39,7 +39,7 @@ Rescales ANUClimate 2.0 Gridded data (0.01°x0.01°) to match the resolution of 
 
  <br/>
   
-#### 5 - `make_cel_centroids_df`
+#### 5 - `make_cell_centroids_df`
 Computes grid cell centroid locations for grid cells or samples to the resolution of the rasters being used. 
 
  <br/>
