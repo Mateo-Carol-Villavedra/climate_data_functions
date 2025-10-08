@@ -60,7 +60,8 @@ R Functions developed as part of Carol Villavedra et al. (2022) for extracting a
 ## Available Climate Data:
 <br/>
 
-### AGCD (Australian Gridded Climate Data)  -  Previously BOM AWAP (Bureau of Meteorology Australian Water Availability Project)
+### AGCD (Australian Gridded Climate Data)
+### Previously BOM AWAP (Bureau of Meteorology Australian Water Availability Project)
 
 #### Resolution = 0.05° x 0.05° <br/>
 
