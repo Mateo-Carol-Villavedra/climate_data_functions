@@ -103,7 +103,7 @@ R Functions developed as part of Carol Villavedra et al. (2022) for extracting a
 <br/>
 <br/>
 
-### ANUClimate 2.0 (Scientific Information for Land Owners)
+### ANUClimate 2.0
 
 #### Resolution = 0.01° x 0.01°  <br/>
 
