@@ -6,7 +6,7 @@
 
 A function to compute bioclimatic indices (BIO1-BIO27) for each individual sample based on their assigned climate data from the `assign_clim.data` function. <br/>
 
-**CRITICAL REQUIREMENT:** This function is designed to compute bioclimatic indices assuming each sample has exactly **1 year (365 or 366 days) of climate data**. The output will not be accurate if a different time period is provided. When using `assign_clim.data`, ensure the pre_period and post_period sum to exactly one year. <br/>
+**NOTE:** This function is designed to compute bioclimatic indices assuming each sample has exactly **1 year (365 or 366 days) of climate data**. The output will not be accurate if a different time period is provided. When using `assign_clim.data`, ensure the pre_period and post_period sum to exactly one year. <br/>
 
 The function computes bioclimatic indices using daily values for maximum temperature, minimum temperature, precipitation, and/or radiation, allowing users to select which indices to compute and which climate variables to use. <br/>
 
@@ -40,48 +40,50 @@ Must contain:
 
 ### bioclim_indices: <br/>
 A numeric vector specifying which bioclimatic indices to compute. <br/>
-Values range from 1 to 27. <br/>
+      Values range from 1 to 27. <br/>
+      
+  Example: `c(1, 2, 3, 4, 5, 6, 7, 8, 15, 22, 21, 26)`
+  
+  <br/>  
 
-**Index categories:**
-- **BIO1-BIO11:** Temperature-based indices
-- **BIO12-BIO19:** Precipitation-based indices
-- **BIO20-BIO27:** Radiation-based indices
+  **Variable requirements for each index:**
+      
+  |Index | Category  |Required Variables | Description |
+  |:-----|:----------|:-------------------|:------------|
+  |BIO1  | Temperature | Max Temp, Min Temp | Annual Mean Temperature |
+  |BIO2  | Temperature | Max Temp, Min Temp | Mean Diurnal Range |
+  |BIO3  | Temperature | Max Temp, Min Temp | Isothermality |
+  |BIO4  | Temperature | Max Temp, Min Temp | Temperature Seasonality |
+  |BIO5  | Temperature | Max Temp | Max Temperature of Warmest Month |
+  |BIO6  | Temperature | Min Temp | Min Temperature of Coldest Month |
+  |BIO7  | Temperature | Max Temp, Min Temp | Temperature Annual Range |
+  |BIO8  | Temperature | Max Temp, Min Temp, Precip | Mean Temperature of Wettest Quarter |
+  |BIO9  | Temperature | Max Temp, Min Temp, Precip | Mean Temperature of Driest Quarter |
+  |BIO10 | Temperature | Max Temp | Mean Temperature of Warmest Quarter |
+  |BIO11 | Temperature | Min Temp | Mean Temperature of Coldest Quarter |
+  |BIO12 | Precipitation | Precip | Annual Precipitation |
+  |BIO13 | Precipitation | Precip | Precipitation of Wettest Month |
+  |BIO14 | Precipitation | Precip | Precipitation of Driest Month |
+  |BIO15 | Precipitation | Precip | Precipitation Seasonality |
+  |BIO16 | Precipitation | Precip | Precipitation of Wettest Quarter |
+  |BIO17 | Precipitation | Precip | Precipitation of Driest Quarter |
+  |BIO18 | Precipitation | Precip, Max Temp | Precipitation of Warmest Quarter |
+  |BIO19 | Precipitation | Precip, Min Temp | Precipitation of Coldest Quarter |
+  |BIO20 | Radiation | Radiation | Mean Annual Radiation |
+  |BIO21 | Radiation | Radiation | Highest Monthly Mean Radiation |
+  |BIO22 | Radiation | Radiation | Lowest Monthly Mean Radiation |
+  |BIO23 | Radiation | Radiation | Radiation Seasonality |
+  |BIO24 | Radiation | Radiation, Precip | Radiation of Wettest Quarter |
+  |BIO25 | Radiation |  Radiation, Precip | Radiation of Driest Quarter |
+  |BIO26 | Radiation |  Radiation, Max Temp | Radiation of Warmest Quarter |
+  |BIO27 | Radiation |  Radiation, Min Temp | Radiation of Coldest Quarter |
+  
+  <br/>
+  
+**See Carol Villavedra et al. (2026) Supplementary Materials for Specific Arithmetic used to Compute Each Bioclimatic Index.**    
 
-Example: `c(1, 2, 3, 4, 5, 6, 7, 8, 15, 22, 21, 26)` <br/>
-
-**Variable requirements for each index:**
-
-|Index | Required Variables | Description |
-|:-----|:-------------------|:------------|
-|BIO1  | Max Temp, Min Temp | Annual Mean Temperature |
-|BIO2  | Max Temp, Min Temp | Mean Diurnal Range |
-|BIO3  | Max Temp, Min Temp | Isothermality |
-|BIO4  | Max Temp, Min Temp | Temperature Seasonality |
-|BIO5  | Max Temp | Max Temperature of Warmest Month |
-|BIO6  | Min Temp | Min Temperature of Coldest Month |
-|BIO7  | Max Temp, Min Temp | Temperature Annual Range |
-|BIO8  | Max Temp, Min Temp, Precip | Mean Temperature of Wettest Quarter |
-|BIO9  | Max Temp, Min Temp, Precip | Mean Temperature of Driest Quarter |
-|BIO10 | Max Temp | Mean Temperature of Warmest Quarter |
-|BIO11 | Min Temp | Mean Temperature of Coldest Quarter |
-|BIO12 | Precip | Annual Precipitation |
-|BIO13 | Precip | Precipitation of Wettest Month |
-|BIO14 | Precip | Precipitation of Driest Month |
-|BIO15 | Precip | Precipitation Seasonality |
-|BIO16 | Precip | Precipitation of Wettest Quarter |
-|BIO17 | Precip | Precipitation of Driest Quarter |
-|BIO18 | Precip, Max Temp | Precipitation of Warmest Quarter |
-|BIO19 | Precip, Min Temp | Precipitation of Coldest Quarter |
-|BIO20 | Radiation | Mean Annual Radiation |
-|BIO21 | Radiation | Highest Monthly Mean Radiation |
-|BIO22 | Radiation | Lowest Monthly Mean Radiation |
-|BIO23 | Radiation | Radiation Seasonality |
-|BIO24 | Radiation, Precip | Radiation of Wettest Quarter |
-|BIO25 | Radiation, Precip | Radiation of Driest Quarter |
-|BIO26 | Radiation, Max Temp | Radiation of Warmest Quarter |
-|BIO27 | Radiation, Min Temp | Radiation of Coldest Quarter |
-
-<br/>
+  
+  <br/>
 
 
 ### var.names: <br/>
@@ -143,10 +145,6 @@ The dataframe is saved as an RDS file at the specified output path and returned 
 - When using `assign_clim.data`, set the time period so that `pre_period + post_period + sampling date = 1 year`
 - The function automatically handles synonymous variable names from different data sources (SILO, AGCD, ANUClimate)
 - If multiple synonymous variables exist in the input data (e.g., both `tmax` and `max_temp`), specify only one in `var.names` - the function will remove the others and standardize naming
-- Not all four variable types (max temp, min temp, precip, radiation) are required unless computing all 27 indices
-- The function validates that required variables are present for requested indices before processing
-- Quarterly calculations use rolling 3-month periods (e.g., Jan-Feb-Mar, Feb-Mar-Apr, ..., Dec-Jan-Feb)
-- Temperature seasonality (BIO4) is calculated using Kelvin to maintain standardization with Xu and Hutchinson (2011)
 - Leap years (366 days) are handled automatically
 - The function performs monthly and quarterly aggregations as intermediate steps to compute various indices
 - Processing time depends on the number of samples, indices requested, and variables included
