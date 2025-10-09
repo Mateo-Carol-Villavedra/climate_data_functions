@@ -24,6 +24,7 @@ Processed (reprojected and cropped) rasters are saved to a `processed` subdirect
 ### first_year: <br/>
 An integer specifying the first year from which to download climate data. <br/>
 Must be 1889 or later (the earliest year for which SILO data is available). <br/>
+See table below for specific available years for each climatic variable.<br/>
 <br/>
 
 
@@ -157,11 +158,29 @@ The function provides progress messages indicating which years are being downloa
 ## Notes:
 
 - SILO data has a resolution of 0.05° × 0.05°
+
+<br/>
+
 - All SILO variables are available from 1889, providing the longest temporal coverage of the three databases
+
+<br/>
+
 - SILO offers the most comprehensive range of climate variables, including multiple evapotranspiration estimates and solar radiation
+
+<br/>
+
 - Ensure adequate disk space is available, as climate raster files can be large, especially for extended time periods or large spatial extents
+
+<br/>
+
 - The cropping shapefile should have a buffer of at least one grid cell around your area of interest to prevent edge effects
+
+<br/>
+
 - Raw files are retained after processing, allowing reprocessing with different crop extents without re-downloading
+
+<br/>
+
 - Auxiliary files (.aux, .aux.xml, .json) are automatically cleaned up after processing
 
 
