@@ -76,6 +76,10 @@ Example: `c(1, 2, 3, 4, 5, 6, 7, 8, 15, 22, 21, 26)` <br/>
 |BIO25 | Radiation |  Radiation, Precip | Radiation of Driest Quarter |
 |BIO26 | Radiation |  Radiation, Max Temp | Radiation of Warmest Quarter |
 |BIO27 | Radiation |  Radiation, Min Temp | Radiation of Coldest Quarter |
+  
+  <br/>
+  
+**See Carol Villavedra et al. (2026) Supplementary Materials for Specific Arithmetic used to Compute Each Bioclimatic Index.** 
 
 <br/>
 
