@@ -119,8 +119,48 @@ R Functions developed as part of Carol Villavedra et al. (2022) for extracting a
 | Vapour Pressure         | vp                  |     1960       |
 | Vapour Pressure Deficit | vpd                 |     1960       |
 
+----
 
-<br/>
+ <br/>
+ 
+
+## Available Bioclimatic Indices: <br/>
+  
+  <br/>
+  
+**See Carol Villavedra et al. (2026) Supplementary Materials for Specific Arithmetic used to Compute Each Bioclimatic Index.** 
+
+|Index | Category  |Required Variables | Description |
+|:-----|:----------|:-------------------|:------------|
+|BIO1  | Temperature | Max Temp, Min Temp | Annual Mean Temperature |
+|BIO2  | Temperature | Max Temp, Min Temp | Mean Diurnal Range |
+|BIO3  | Temperature | Max Temp, Min Temp | Isothermality |
+|BIO4  | Temperature | Max Temp, Min Temp | Temperature Seasonality |
+|BIO5  | Temperature | Max Temp | Max Temperature of Warmest Month |
+|BIO6  | Temperature | Min Temp | Min Temperature of Coldest Month |
+|BIO7  | Temperature | Max Temp, Min Temp | Temperature Annual Range |
+|BIO8  | Temperature | Max Temp, Min Temp, Precip | Mean Temperature of Wettest Quarter |
+|BIO9  | Temperature | Max Temp, Min Temp, Precip | Mean Temperature of Driest Quarter |
+|BIO10 | Temperature | Max Temp | Mean Temperature of Warmest Quarter |
+|BIO11 | Temperature | Min Temp | Mean Temperature of Coldest Quarter |
+|BIO12 | Precipitation | Precip | Annual Precipitation |
+|BIO13 | Precipitation | Precip | Precipitation of Wettest Month |
+|BIO14 | Precipitation | Precip | Precipitation of Driest Month |
+|BIO15 | Precipitation | Precip | Precipitation Seasonality |
+|BIO16 | Precipitation | Precip | Precipitation of Wettest Quarter |
+|BIO17 | Precipitation | Precip | Precipitation of Driest Quarter |
+|BIO18 | Precipitation | Precip, Max Temp | Precipitation of Warmest Quarter |
+|BIO19 | Precipitation | Precip, Min Temp | Precipitation of Coldest Quarter |
+|BIO20 | Radiation | Radiation | Mean Annual Radiation |
+|BIO21 | Radiation | Radiation | Highest Monthly Mean Radiation |
+|BIO22 | Radiation | Radiation | Lowest Monthly Mean Radiation |
+|BIO23 | Radiation | Radiation | Radiation Seasonality |
+|BIO24 | Radiation | Radiation, Precip | Radiation of Wettest Quarter |
+|BIO25 | Radiation |  Radiation, Precip | Radiation of Driest Quarter |
+|BIO26 | Radiation |  Radiation, Max Temp | Radiation of Warmest Quarter |
+|BIO27 | Radiation |  Radiation, Min Temp | Radiation of Coldest Quarter |
+
+
 <br/>
 
 ----
@@ -227,6 +267,8 @@ Compute Bioclimatic Indices for samples.
 Compute Bioclimatix Indices for grid cells to produce spatial grids of indices. 
 
 **Functions:** `compute_centroid_bioclims`
+
+
 <br/>        
 
 
