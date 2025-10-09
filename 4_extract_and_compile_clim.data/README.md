@@ -119,15 +119,31 @@ The dataframe is saved as an RDS file at the specified output path and returned 
 ## Notes:
 
 - **Resolution matching is critical:** Centroid coordinates must be rounded to match raster resolution to ensure accurate data extraction
-- The function automatically detects and uses rescaled ANUClimate files (if present) to maintain resolution consistency across data sources
-- If using only ANUClimate data at original resolution (0.01° × 0.01°), do not rescale and ensure centroids match this resolution
+      - The function automatically detects and uses rescaled ANUClimate files (if present) to maintain resolution consistency across data sources
+      - If using only ANUClimate data at original resolution (0.01° × 0.01°), do not rescale and ensure centroids match this resolution
+
+<br/>
+
 - The function performs CRS transformations automatically if centroids and rasters have different projections
+
+<br/>
+
 - All variables are merged on location (lat, lon, centroid.id) and date (clim_date), ensuring aligned records
+
+<br/>
+
 - The function validates that all variables have the same number of unique join keys before merging to prevent row duplication
+
+<br/>
+
 - Progress messages indicate which files are being processed and whether rescaled or original files are used
+
+<br/>
+
 - **Shapefile margin warning:** If NA values appear in the output, the shapefile used to crop rasters in earlier steps may have been too small, excluding cells that align with centroids. Ensure the crop shapefile encompasses a margin of several cells beyond your area of interest
-- Memory management: The function uses `data.table` for efficient processing and includes garbage collection steps to manage memory with large datasets
-- The function handles leap years automatically, ensuring correct date attribution for all days
+
+<br/>
+
 - CRS checking can identify inconsistencies between files but does not prevent processing
 
 
