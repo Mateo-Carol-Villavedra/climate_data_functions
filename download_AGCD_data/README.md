@@ -21,15 +21,10 @@ Processed (reprojected and cropped) rasters are saved to a `processed` subdirect
 
 ## Function Arguments and Input
 
-### grid_df: <br/>
-The R dataframe output of the function `extract_and_compile_clim.data` or an R dataframe with identical characteristics. <br/>
-Source from which climate data is extracted and assigned to each individual. <br/>
-<br/>
-
-
 ### first_year: <br/>
 An integer specifying the first year from which to download climate data. <br/>
 Must be 1900 or later (the earliest year for which AGCD data is available). <br/>
+See table below for specific available years for each climatic variable.<br/>
 <br/>
 
 
