@@ -107,13 +107,13 @@
 #...............................................................................................................................................................................
 
 
-#    -    av_period_start           -    A numerical value describing the year which starts the averaging period sequence
+#    -    period_start           -    A numerical value describing the year which starts the averaging period sequence
 
 
 #...............................................................................................................................................................................
 
 
-#    -    av_period_end             -    A numerical value describing the final year in the averaging period sequence
+#    -    period_end             -    A numerical value describing the final year in the averaging period sequence
 
 
 #...............................................................................................................................................................................
@@ -144,8 +144,8 @@
 compute_centroid_bioclims <- function(centroid_clim.data,
                                       bioclim_indices,
                                       var.names,
-                                      av_period_start,
-                                      av_period_end,
+                                      period_start,
+                                      period_end,
                                       av_period_by,
                                       output_directory) {
       
@@ -1017,8 +1017,8 @@ compute_centroid_bioclims <- function(centroid_clim.data,
             
             # Assign each year to an averaging block
             results_df <- results_df %>%
-                  dplyr::mutate(period_floor = floor((clim_year - av_period_start) / av_period_by) * av_period_by + av_period_start) %>%
-                  dplyr::filter(clim_year >= av_period_start, clim_year <= av_period_end)
+                  dplyr::mutate(period_floor = floor((clim_year - period_start) / av_period_by) * av_period_by + period_start) %>%
+                  dplyr::filter(clim_year >= period_start, clim_year <= period_end)
             
             
             # Averaging for within each centroid and time block:
@@ -1053,8 +1053,8 @@ compute_centroid_bioclims <- function(centroid_clim.data,
 # test_centroid_bioclim <- compute_centroid_bioclims(centroid_clim.data = test_compile.raster,
 #                                                    bioclim_indices = c(2, 3, 12, 23),
 #                                                    var.names = c("tmin", "tmax", "daily_rain", "radiation"),
-#                                                    av_period_start = 2019,
-#                                                    av_period_end = 2020,
+#                                                    period_start = 2019,
+#                                                    period_end = 2020,
 #                                                    av_period_by = 1, 
 #                                                    output_directory = "github/test_centroid_compute_bioclim.RDS")
 
