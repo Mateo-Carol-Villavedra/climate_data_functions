@@ -148,12 +148,25 @@ The output is saved as a CSV file with the resolution encoded in the filename. <
 ## Notes:
 
 - The function automatically extracts the resolution from the template raster - no need to specify it manually
+
+<br/>
+
 - When using `method = "sample"`, the function rounds coordinates to the nearest grid cell centroid, ensuring samples are correctly mapped to their corresponding climate data cells
+
+<br/>
+
 - For `method = "sample"`, duplicate grid cells (multiple samples in the same cell) are reduced to unique centroids, but the full sample metadata is retained
+
+<br/>
+
 - The template raster can be from any climate data source (SILO, AGCD, or ANUClimate), but should match the resolution of the data you'll be working with
-- If using rescaled ANUClimate data, use a rescaled ANUClimate file as the template to ensure resolution consistency
-- The `centroid.id` provides a convenient way to reference specific grid cells in subsequent analyses
+
+<br/>
+
 - Grid method outputs can be large for fine-resolution rasters over large extents
+
+<br/>
+
 - Sample method is computationally lighter as it only processes locations where samples exist
 
 
