@@ -163,8 +163,6 @@ The function provides a summary message indicating:
 - **Boundary date control:** Use `include_start_date` and `include_end_date` to fine-tune exactly which dates are included, which is important for ensuring the correct number of days (especially for bioclimatic index calculations)
 - **Record count verification:** After running, check that individuals each have the correct number of days based on your specified periods. You may need to adjust the boundary date controls to achieve the exact time period needed
 - **Leap year handling:** The function automatically handles leap years, but this may result in some individuals having 365 days and others having 366 days if their climate period spans different years
-- **Performance:** The function uses `data.table` for efficient filtering and provides progress messages every 50 samples
-- **Memory management:** After processing, the function automatically cleans up intermediate objects to free memory
 - **Coordinate matching:** Sample coordinates must exactly match the resolution of the grid_df centroids (rounded using `make_cell_centroids_df`)
 - **Date format:** Input dates must be in "dd/mm/yyyy" format (e.g., "24/12/1965")
 - **Missing data:** If no climate data is found for a sample's location and time period, that sample will have zero rows in the output
