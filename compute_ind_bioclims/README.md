@@ -142,11 +142,29 @@ The dataframe is saved as an RDS file at the specified output path and returned 
 ## Notes:
 
 - **Critical time period requirement:** Each sample MUST have exactly 1 year (365 or 366 days) of climate data for accurate bioclimatic index calculation
+
+<br/>
+
 - When using `assign_clim.data`, set the time period so that `pre_period + post_period + sampling date = 1 year`
+
+<br/>
+
 - The function automatically handles synonymous variable names from different data sources (SILO, AGCD, ANUClimate)
+
+<br/>
+
 - If multiple synonymous variables exist in the input data (e.g., both `tmax` and `max_temp`), specify only one in `var.names` - the function will remove the others and standardize naming
+
+<br/>
+
 - Leap years (366 days) are handled automatically
+
+<br/>
+
 - The function performs monthly and quarterly aggregations as intermediate steps to compute various indices
+
+<br/>
+
 - Processing time depends on the number of samples, indices requested, and variables included
 
 
