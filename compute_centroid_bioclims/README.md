@@ -8,9 +8,9 @@ A function to compute bioclimatic indices (BIO1-BIO27) for each grid cell centro
 
 This function calculates bioclimatic indices for each calendar year at each grid cell location, using daily climate values for maximum temperature, minimum temperature, precipitation, and/or radiation. <br/>
 
-Unlike `compute_ind_bioclims` which computes indices for individual samples with user specified periods, this function computes indices for grid cells across multiple calendar years, making it suitable for creating spatial grids of bioclimatic indices. <br/>
+Unlike `compute_ind_bioclims` which computes indices for individual samples with user specified periods, this function computes indices for every grid cell across all calendar years in a user defined time series (`period_start` & `period_end`), making it suitable for creating spatial grids of bioclimatic indices. <br/>
 
-The function includes an optional temporal averaging capability, allowing users to compute multi-year average indices (e.g., decadal averages) for each grid cell. <br/>
+The function includes an optional temporal averaging capability, allowing users to compute multi-year average indices (e.g., decadal averages) for each grid cell (`av_period_by`). <br/>
 
 Users can select which indices to compute and which climate variables to use, combining variables from any combination of the three databases (SILO, AGCD, ANUClimate). The function handles synonymous variable names (e.g., `tmax`, `max_temp`, `t_max` all represent maximum temperature). <br/>
 
@@ -42,44 +42,40 @@ Must contain:
 A numeric vector specifying which bioclimatic indices to compute. <br/>
 Values range from 1 to 27. <br/>
 
-**Index categories:**
-- **BIO1-BIO11:** Temperature-based indices
-- **BIO12-BIO19:** Precipitation-based indices
-- **BIO20-BIO27:** Radiation-based indices
 
 Example: `c(1, 2, 3, 4, 5, 6, 7, 8, 15, 22, 21, 26)` <br/>
 
 **Variable requirements for each index:**
 
-|Index | Required Variables | Description |
-|:-----|:-------------------|:------------|
-|BIO1  | Max Temp, Min Temp | Annual Mean Temperature |
-|BIO2  | Max Temp, Min Temp | Mean Diurnal Range |
-|BIO3  | Max Temp, Min Temp | Isothermality |
-|BIO4  | Max Temp, Min Temp | Temperature Seasonality |
-|BIO5  | Max Temp | Max Temperature of Warmest Month |
-|BIO6  | Min Temp | Min Temperature of Coldest Month |
-|BIO7  | Max Temp, Min Temp | Temperature Annual Range |
-|BIO8  | Max Temp, Min Temp, Precip | Mean Temperature of Wettest Quarter |
-|BIO9  | Max Temp, Min Temp, Precip | Mean Temperature of Driest Quarter |
-|BIO10 | Max Temp | Mean Temperature of Warmest Quarter |
-|BIO11 | Min Temp | Mean Temperature of Coldest Quarter |
-|BIO12 | Precip | Annual Precipitation |
-|BIO13 | Precip | Precipitation of Wettest Month |
-|BIO14 | Precip | Precipitation of Driest Month |
-|BIO15 | Precip | Precipitation Seasonality |
-|BIO16 | Precip | Precipitation of Wettest Quarter |
-|BIO17 | Precip | Precipitation of Driest Quarter |
-|BIO18 | Precip, Max Temp | Precipitation of Warmest Quarter |
-|BIO19 | Precip, Min Temp | Precipitation of Coldest Quarter |
-|BIO20 | Radiation | Mean Annual Radiation |
-|BIO21 | Radiation | Highest Monthly Mean Radiation |
-|BIO22 | Radiation | Lowest Monthly Mean Radiation |
-|BIO23 | Radiation | Radiation Seasonality |
-|BIO24 | Radiation, Precip | Radiation of Wettest Quarter |
-|BIO25 | Radiation, Precip | Radiation of Driest Quarter |
-|BIO26 | Radiation, Max Temp | Radiation of Warmest Quarter |
-|BIO27 | Radiation, Min Temp | Radiation of Coldest Quarter |
+|Index | Category  |Required Variables | Description |
+|:-----|:----------|:-------------------|:------------|
+|BIO1  | Temperature | Max Temp, Min Temp | Annual Mean Temperature |
+|BIO2  | Temperature | Max Temp, Min Temp | Mean Diurnal Range |
+|BIO3  | Temperature | Max Temp, Min Temp | Isothermality |
+|BIO4  | Temperature | Max Temp, Min Temp | Temperature Seasonality |
+|BIO5  | Temperature | Max Temp | Max Temperature of Warmest Month |
+|BIO6  | Temperature | Min Temp | Min Temperature of Coldest Month |
+|BIO7  | Temperature | Max Temp, Min Temp | Temperature Annual Range |
+|BIO8  | Temperature | Max Temp, Min Temp, Precip | Mean Temperature of Wettest Quarter |
+|BIO9  | Temperature | Max Temp, Min Temp, Precip | Mean Temperature of Driest Quarter |
+|BIO10 | Temperature | Max Temp | Mean Temperature of Warmest Quarter |
+|BIO11 | Temperature | Min Temp | Mean Temperature of Coldest Quarter |
+|BIO12 | Precipitation | Precip | Annual Precipitation |
+|BIO13 | Precipitation | Precip | Precipitation of Wettest Month |
+|BIO14 | Precipitation | Precip | Precipitation of Driest Month |
+|BIO15 | Precipitation | Precip | Precipitation Seasonality |
+|BIO16 | Precipitation | Precip | Precipitation of Wettest Quarter |
+|BIO17 | Precipitation | Precip | Precipitation of Driest Quarter |
+|BIO18 | Precipitation | Precip, Max Temp | Precipitation of Warmest Quarter |
+|BIO19 | Precipitation | Precip, Min Temp | Precipitation of Coldest Quarter |
+|BIO20 | Radiation | Radiation | Mean Annual Radiation |
+|BIO21 | Radiation | Radiation | Highest Monthly Mean Radiation |
+|BIO22 | Radiation | Radiation | Lowest Monthly Mean Radiation |
+|BIO23 | Radiation | Radiation | Radiation Seasonality |
+|BIO24 | Radiation | Radiation, Precip | Radiation of Wettest Quarter |
+|BIO25 | Radiation |  Radiation, Precip | Radiation of Driest Quarter |
+|BIO26 | Radiation |  Radiation, Max Temp | Radiation of Warmest Quarter |
+|BIO27 | Radiation |  Radiation, Min Temp | Radiation of Coldest Quarter |
 
 <br/>
 
@@ -104,17 +100,17 @@ Example: `c("t_max", "t_min", "rain", "srad")` <br/>
 <br/>
 
 
-### av_period_start: <br/>
+### period_start: <br/>
 A numeric value (year) specifying the first year of the temporal range to include in the analysis. <br/>
-Used in conjunction with `av_period_end` and `av_period_by` to define averaging periods. <br/>
+Used in conjunction with `period_end` and `av_period_by` to define averaging periods. <br/>
 
 Example: `1990` <br/>
 <br/>
 
 
-### av_period_end: <br/>
+### period_end: <br/>
 A numeric value (year) specifying the last year of the temporal range to include in the analysis. <br/>
-Used in conjunction with `av_period_start` and `av_period_by` to define averaging periods. <br/>
+Used in conjunction with `period_start` and `av_period_by` to define averaging periods. <br/>
 
 Example: `2020` <br/>
 <br/>
@@ -224,8 +220,8 @@ centroid_bioclims <- compute_centroid_bioclims(
                          centroid_clim.data = centroid_climate_data,
                          bioclim_indices = c(1, 2, 5, 6, 12, 13, 20, 21),
                          var.names = c("tmax", "tmin", "precip", "radiation"),
-                         av_period_start = 2010,
-                         av_period_end = 2020,
+                         period_start = 2010,
+                         period_end = 2020,
                          av_period_by = 1,
                          output_directory = "path_to_save_location/annual_centroid_bioclims.RDS")
 ```
@@ -238,8 +234,8 @@ centroid_bioclims_decadal <- compute_centroid_bioclims(
                                  centroid_clim.data = centroid_climate_data,
                                  bioclim_indices = c(1:19),
                                  var.names = c("max_temp", "min_temp", "daily_rain"),
-                                 av_period_start = 1990,
-                                 av_period_end = 2020,
+                                 period_start = 1990,
+                                 period_end = 2020,
                                  av_period_by = 10,
                                  output_directory = "path_to_save_location/decadal_centroid_bioclims.RDS")
 ```
@@ -252,8 +248,8 @@ climate_normals <- compute_centroid_bioclims(
                        centroid_clim.data = centroid_climate_data,
                        bioclim_indices = c(1, 2, 3, 4, 5, 6, 7, 10, 11),
                        var.names = c("tmax", "tmin"),
-                       av_period_start = 1991,
-                       av_period_end = 2020,
+                       period_start = 1991,
+                       period_end = 2020,
                        av_period_by = 30,
                        output_directory = "path_to_save_location/climate_normals_1991_2020.RDS")
 ```
@@ -266,8 +262,8 @@ centroid_bioclims_5yr <- compute_centroid_bioclims(
                              centroid_clim.data = centroid_climate_data,
                              bioclim_indices = c(1:27),
                              var.names = c("max_temp", "min_temp", "daily_rain", "srad"),
-                             av_period_start = 2000,
-                             av_period_end = 2020,
+                             period_start = 2000,
+                             period_end = 2020,
                              av_period_by = 5,
                              output_directory = "path_to_save_location/5yr_avg_all_indices.RDS")
 ```
@@ -280,8 +276,8 @@ radiation_indices <- compute_centroid_bioclims(
                          centroid_clim.data = centroid_climate_data,
                          bioclim_indices = c(20, 21, 22, 23),
                          var.names = c("radiation"),
-                         av_period_start = 2015,
-                         av_period_end = 2020,
+                         period_start = 2015,
+                         period_end = 2020,
                          av_period_by = 1,
                          output_directory = "path_to_save_location/radiation_indices_annual.RDS")
 ```
