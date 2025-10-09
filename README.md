@@ -22,7 +22,7 @@ R Functions developed as part of Carol Villavedra et al. (2022) for extracting a
 |  Function  |  Description :  |  Dependencies:  |
 | :--------: |  :------------  | :------------   |
 |            |                 |                 |
-| `download_AWAP_data` |  Downloads annual files of daily climate data rasters for each user specified year from the AGCD Database (Previously BOM AWAP), reprojects them to CRS:4326 and crops them to an extent defined by a user supplied shapefile.  |  `curl`, `terra` | 
+| `download_AGCD_data` |  Downloads annual files of daily climate data rasters for each user specified year from the AGCD Database (Previously BOM AWAP), reprojects them to CRS:4326 and crops them to an extent defined by a user supplied shapefile.  |  `curl`, `terra` | 
 |            |                 |                 |
 | `download_SILO_data` |  Downloads annual files of daily climate data rasters for each user specified year from the SILO Database, reprojects them to CRS:4326 and crops them to an extent defined by a user supplied shapefile.   |  `curl`, `terra` | 
 |            |                 |                 |
@@ -177,7 +177,7 @@ Used in `make_cell_centroids_df` and `assign_clim.data`
 
 Download and Crop Climate dataset for variables and years of interest
 
-**Functions:** `download_AWAP_data` and/or `download_SILO_data` and/or `download_ANUCLIM_data`
+**Functions:** `download_AGCD_data` and/or `download_SILO_data` and/or `download_ANUCLIM_data`
  <br/>
 
 ### Step 2:  (OPTIONAL)
