@@ -29,7 +29,8 @@ All monthly rasters are automatically reprojected to CRS:4326 for compatibility 
 
 ### first_year: <br/>
 An integer specifying the first year from which to download climate data. <br/>
-Must be 1900 or later (the earliest year for which ANUClimate data is available). <br/>
+Must be 1900 or later (the earliest year for which ANUClimate data is available).<br/>
+See table below for specific available years for each climatic variable.<br/>
 <br/>
 
 
@@ -180,15 +181,45 @@ The function provides detailed progress messages indicating which months and yea
 ## Notes:
 
 - ANUClimate data has a resolution of 0.01° × 0.01° (higher resolution than AGCD and SILO at 0.05° × 0.05°)
-- If using ANUClimate variables alongside AGCD or SILO variables, use the `rescale_rasters` function to match resolutions
+
+<br/>
+
+- If using ANUClimate variables alongside AGCD or SILO variables, use the `rescale_rasters` function downstream to match resolutions
+
+<br/>
+
 - Different variables have different start dates - the function will automatically skip years for which data is unavailable and inform the user
+
+<br/>
+
 - The function verifies that all 12 monthly files are present before compiling to an annual raster
+
+<br/>
+
 - The function checks for correct number of days per month (accounting for leap years)
+
+<br/>
+
 - Temperature variables from ANUClimate (`tmin`, `tmax`) are automatically renamed to `t_min` and `t_max` to prevent conflicts with AGCD variable names
+
+<br/>
+
 - Monthly files are retained after processing, allowing reprocessing or recompilation without re-downloading
+
+<br/>
+
 - Ensure adequate disk space is available - ANUClimate files are larger due to higher resolution and the storage of both monthly and annual files
-- The cropping shapefile should have a buffer of at least one grid cell around your area of interest to prevent edge effects
+
+<br/>
+
+- The cropping shapefile should have a buffer of at least one grid cell around your area of interest to prevent edge effects for downstream functions
+
+<br/>
+
 - Auxiliary files (.aux, .aux.xml, .json) are automatically cleaned up after processing
+
+<br/>
+
 - If compilation fails for a year (e.g., missing months or layer count mismatch), that year will be skipped with a warning message
 
 
