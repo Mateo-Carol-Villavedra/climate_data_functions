@@ -22,13 +22,13 @@ R Functions developed as part of Carol Villavedra et al. (2022) for extracting a
 |  Function  |  Description :  |  Dependencies:  |
 | :--------: |  :------------  | :------------   |
 |            |                 |                 |
-| `download_AGCD_data` |  Downloads annual files of daily climate data rasters for each user specified year from the AGCD Database (Previously BOM AWAP), reprojects them to CRS:4326 and crops them to an extent defined by a user supplied shapefile.  |  `curl`, `terra` | 
+| `download_AGCD_data` |  Downloads annual files of daily climate data rasters for each user specified year from the AGCD v1.0.2 Database (Previously BOM AWAP), reprojects them to CRS:4326 and crops them to an extent defined by a user supplied shapefile.  |  `curl`, `terra` | 
 |            |                 |                 |
 | `download_SILO_data` |  Downloads annual files of daily climate data rasters for each user specified year from the SILO Database, reprojects them to CRS:4326 and crops them to an extent defined by a user supplied shapefile.   |  `curl`, `terra` | 
 |            |                 |                 |
 | `download_ANUCLIM_data` |  Downloads monthly files of daily climate data rasters for each user specified year from the ANUClimate Database, reprojects them to CRS:4326, crops them to an extent defined by a user supplied shapefile and then stacks the monthly rasters into a single annualised raster.   |  `curl`, `terra`, `tidverse`| 
 |            |                 |                 |
-| `rescale_rasters` |  Rescales ANUClimate 2.0 Gridded data (0.01°x0.01°) to match the resolution of AGCD and SILO gridded data (0.05°x0.05), if they are to be used simultaneously.   |  `terra`, `tidyverse` | 
+| `rescale_rasters` |  Rescales ANUClimate 2.0 Gridded data (0.01°x0.01°) to match the resolution of AGCD v1.0.2 and SILO gridded data (0.05°x0.05), if they are to be used simultaneously.   |  `terra`, `tidyverse` | 
 |            |                 |                 |
 | `make_cell_centroids_df` |  Computes grid cell centroid locations for grid cells or samples to the resolution of the rasters being used.   | `terra`, `sf`, `tidyverse` | 
 |            |                 |                 |
@@ -60,7 +60,7 @@ R Functions developed as part of Carol Villavedra et al. (2022) for extracting a
 ## Available Climate Data:
 <br/>
 
-### AGCD (Australian Gridded Climate Data)
+### AGCD v1.0.2 (Australian Gridded Climate Data)
 ### Previously BOM AWAP (Bureau of Meteorology Australian Water Availability Project)
 
 #### Resolution = 0.05° x 0.05° <br/>
