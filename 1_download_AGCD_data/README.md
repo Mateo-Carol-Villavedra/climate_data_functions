@@ -4,7 +4,7 @@
 
 ##  Description. 
 
-A function to download annual raster grids of daily climate data from the AGCD (Australian Gridded Climate Data) database, previously known as BOM AWAP (Bureau of Meteorology Australian Water Availability Project), for user specified years and climate variables. <br/>
+A function to download annual raster grids of daily climate data from the AGCD (Australian Gridded Climate Data) v.1.0.2 database, previously known as BOM AWAP (Bureau of Meteorology Australian Water Availability Project), for user specified years and climate variables. <br/>
 
 The function automatically creates a directory structure to store downloaded files, with separate folders for each climate variable within the user-specified directory (e.g., `user_directory/precip`). <br/>
 
@@ -23,7 +23,7 @@ Processed (reprojected and cropped) rasters are saved to a `processed` subdirect
 
 ### first_year: <br/>
 An integer specifying the first year from which to download climate data. <br/>
-Must be 1900 or later (the earliest year for which AGCD data is available). <br/>
+Must be 1900 or later (the earliest year for which AGCD v.1.0.2 data is available). <br/>
 See table below for specific available years for each climatic variable.<br/>
 <br/>
 
@@ -45,7 +45,7 @@ Must be 1 or greater. <br/>
 
 
 ### agcd_clim.var: <br/>
-A character vector of climate variable names matching those used by the AGCD database. <br/>
+A character vector of climate variable names matching those used by the AGCD v.1.0.2 database. <br/>
 
 Available variables and their earliest data availability:
 
@@ -146,7 +146,7 @@ The function provides progress messages indicating which years are being downloa
 
 ## Notes:
 
-- AGCD data has a resolution of 0.05° × 0.05°
+- AGCD v.1.0.2 data has a resolution of 0.05° × 0.05°
 
 <br/>
 
