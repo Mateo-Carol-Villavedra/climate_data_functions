@@ -4,7 +4,7 @@
 
 ### Functions to Extract and process Data from SILO, AGCD v.1.0.2 (BOM AWAP) and ANUClimate 2.0 Historical Gridded Datasets:
 
-R Functions developed as part of Carol Villavedra et al. (2022) for extracting and processing gridded historical climate data into bioclimatic indices for individual samples or for reprojection to raster grids. 
+R Functions developed as part of Carol Villavedra et al. (2026) for extracting and processing gridded historical climate data into bioclimatic indices for individual samples or for reprojection to raster grids. 
 
 <br/>
 
