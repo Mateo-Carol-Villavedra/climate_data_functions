@@ -10,7 +10,7 @@ R Functions developed as part of Carol Villavedra et al. (2026) for extracting a
 
 ## If you use these functions, please cite our paper:
 
-#### Carol Villavedra, M., Allen, A.P., Dudaniec, R.Y., O'Hare, J.A. and Beaumont, L.J. (2026). "Historical shifts in wing morphology linked to climate change in the butterfly Tisiphone abeona (Nymphalidae; Satyrinae)." 
+#### Carol Villavedra, M., Allen, A.P., Dudaniec, R.Y., O'Hare, J.A. and Beaumont, L.J. (2026). "Historical shifts in wing morphology linked to climate change in the butterfly Tisiphone abeona (Nymphalidae; Satyrinae)." (In Prep)
 <br/>
 
 ----
@@ -306,7 +306,6 @@ This should not be a problem for the annualised gridded bioclimatic indices.
 
 # Contacts:
 
-These functions may have errors or issues or simply we may not have thought of a useful functionality - Please contact us. 
+These functions may have errors or issues or I simply may not have thought of a useful functionality - Please contact me. 
 
 - Mateo Carol Villavedra - mateo.carolvillavedra@mq.edu.au
-- Drew Allen - drew.allen@mq.edu.au
